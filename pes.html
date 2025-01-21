@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skládačka psa</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: url('pozadi.avif') no-repeat center center;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+        }
+
+        .nadpis {
+            color: #ff6f61;
+            text-align: center;
+            font-size: 28px;
+            margin: 20px 0;
+            text-shadow: 2px 2px 4px black;
+        }
+
+        .zadani {
+            color: gray;
+            text-align: center;
+            margin: 10px 20px;
+            font-size: 18px;
+            text-shadow: 1px 1px 3px black;
+        }
+
+        .logo {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 100px;
+            height: auto;
+            cursor: pointer;
+        }
+
+        .obrazky-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-top: 50px;
+        }
+
+        .row {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .pes {
+            width: 80px;
+            height: 80px;
+            cursor: pointer;
+            border: 2px solid #ff6f61;
+            border-radius: 8px;
+            transition: transform 0.5s ease-in-out;
+            animation-duration: 0.5s;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes shake {
+            0%, 100% {
+                transform: rotate(0deg);
+            }
+            25% {
+                transform: rotate(5deg);
+            }
+            75% {
+                transform: rotate(-5deg);
+            }
+        }
+
+        @keyframes zoom {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 class="nadpis">Skládačka psa</h1>
+    <p class="zadani">Kliknutím na logo a začni skládat. Otoč všechny obrázky tak, aby vznikl finální obrázek.</p>
+    <img class="logo" src="peslogo.JPG" alt="" onclick="rotateAllImages()">
+    <div class="obrazky-container">
+        <div class="row">
+            <img src="pes1.jpg" class="pes" onclick="rotateImage(this)">
+            <img src="pes2.jpg" class="pes" onclick="rotateImage(this)">
+            <img src="pes3.jpg" class="pes" onclick="rotateImage(this)">
+            <img src="pes4.jpg" class="pes" onclick="rotateImage(this)">
+        </div>
+        <div class="row">
+            <img src="pes5.jpg" class="pes" onclick="rotateImage(this)">
+            <img src="pes6.jpg" class="pes" onclick="rotateImage(this)">
+            <img src="pes7.jpg" class="pes" onclick="rotateImage(this)">
+            <img src="pes8.jpg" class="pes" onclick="rotateImage(this)">
+        </div>
+        <div class="row">
+            <img src="pes9.jpg" class="pes" onclick="rotateImage(this)">
+            <img src="pes10.jpg" class="pes" onclick="rotateImage(this)">
+            <img src="pes11.jpg" class="pes" onclick="rotateImage(this)">
+            <img src="pes12.jpg" class="pes" onclick="rotateImage(this)">
+        </div>
+        <div class="row">
+            <img src="pes13.jpg" class="pes" onclick="rotateImage(this)">
+            <img src="pes14.jpg" class="pes" onclick="rotateImage(this)">
+            <img src="pes15.jpg" class="pes" onclick="rotateImage(this)">
+            <img src="pes16.jpg" class="pes" onclick="rotateImage(this)">
+        </div>
+    </div>
+
+    <script>
+        function rotateImage(img) {
+            let rotation = img.dataset.rotation || '0';
+            rotation = parseInt(rotation);
+            rotation += 90;
+            img.dataset.rotation = rotation;
+            img.style.transform = `rotate(${rotation}deg)`;
+        }
+
+        function rotateAllImages() {
+            const images = document.querySelectorAll('.pes');
+            images.forEach(img => {
+                const randomAngle = Math.floor(Math.random() * 360);
+                img.style.animation = 'shake 0.5s ease-in-out, zoom 1s ease-in-out';
+                setTimeout(() => {
+                    img.style.animation = '';
+                    img.style.transform = `rotate(${randomAngle}deg) scale(${1 + Math.random() * 0.2})`;
+                }, 500);
+            });
+        }
+    </script>
+</body>
+</html>
